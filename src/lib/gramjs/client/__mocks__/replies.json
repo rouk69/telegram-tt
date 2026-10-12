@@ -1,0 +1,494 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "self": true,
+      "firstName": "Alex",
+      "lastName": "",
+      "username": "alex"
+    },
+    {
+      "id": "2",
+      "firstName": "Maya",
+      "lastName": "Chen"
+    },
+    {
+      "id": "3",
+      "firstName": "Leo",
+      "lastName": "Novak"
+    },
+    {
+      "id": "4",
+      "firstName": "Sofia",
+      "lastName": "Reyes"
+    },
+    {
+      "id": "5",
+      "firstName": "Daniel",
+      "lastName": "Park"
+    },
+    {
+      "id": "6",
+      "firstName": "Nora",
+      "lastName": "Lind"
+    }
+  ],
+  "chats": [],
+  "channels": [
+    {
+      "id": "-1000000000010",
+      "title": "Weekend Trip 🏔",
+      "megagroup": true,
+      "participantsCount": 6
+    }
+  ],
+  "dialogs": {
+    "active": [
+      {
+        "id": "-1000000000010",
+        "topMessage": 48,
+        "readInboxMaxId": 48
+      },
+      {
+        "id": "2",
+        "topMessage": 1,
+        "readInboxMaxId": 1
+      },
+      {
+        "id": "3",
+        "topMessage": 1,
+        "readInboxMaxId": 1
+      },
+      {
+        "id": "5",
+        "topMessage": 1,
+        "readInboxMaxId": 1
+      },
+      {
+        "id": "6",
+        "topMessage": 1,
+        "readInboxMaxId": 1
+      }
+    ],
+    "archived": []
+  },
+  "messages": {
+    "2": [
+      {
+        "id": 1,
+        "message": "Did you see the cabin photos? 😍",
+        "entities": [],
+        "date": 1791804478,
+        "fromUserId": "2"
+      }
+    ],
+    "3": [
+      {
+        "id": 1,
+        "message": "Bringing the spare sleeping bag 👍",
+        "entities": [],
+        "date": 1791803878,
+        "fromUserId": "3"
+      }
+    ],
+    "5": [
+      {
+        "id": 1,
+        "message": "Charcoal or briquettes?",
+        "entities": [],
+        "date": 1791802678,
+        "fromUserId": "5"
+      }
+    ],
+    "6": [
+      {
+        "id": 1,
+        "message": "Playlist draft is ready",
+        "entities": [],
+        "date": 1791802078,
+        "fromUserId": "6"
+      }
+    ],
+    "-1000000000010": [
+      {
+        "id": 1,
+        "message": "Okay team, the cabin is booked for Saturday 🏔",
+        "entities": [],
+        "date": 1791809375,
+        "fromUserId": "2"
+      },
+      {
+        "id": 2,
+        "message": "Finally!! How far is it from the city?",
+        "entities": [],
+        "date": 1791809472,
+        "fromUserId": "3"
+      },
+      {
+        "id": 3,
+        "message": "About 2.5 hours by car, last 20 min on a gravel road",
+        "entities": [],
+        "date": 1791809569,
+        "fromUserId": "2",
+        "replyToMsgId": 2
+      },
+      {
+        "id": 4,
+        "message": "Who's driving? I can take 3 people in my car",
+        "entities": [],
+        "date": 1791809666,
+        "fromUserId": "4"
+      },
+      {
+        "id": 5,
+        "message": "Gravel road with my old Civic… pass 😅",
+        "entities": [],
+        "date": 1791809763,
+        "fromUserId": "5",
+        "replyToMsgId": 3
+      },
+      {
+        "id": 6,
+        "message": "I'll join Sofia's car",
+        "entities": [],
+        "date": 1791809860,
+        "fromUserId": "1",
+        "out": true,
+        "replyToMsgId": 4
+      },
+      {
+        "id": 7,
+        "message": "Me too, if there's still a seat",
+        "entities": [],
+        "date": 1791809957,
+        "fromUserId": "6",
+        "replyToMsgId": 4
+      },
+      {
+        "id": 8,
+        "message": "Two seats left, Leo?",
+        "entities": [],
+        "date": 1791810054,
+        "fromUserId": "4"
+      },
+      {
+        "id": 9,
+        "message": "Yes please 🙋",
+        "entities": [],
+        "date": 1791810151,
+        "fromUserId": "3",
+        "replyToMsgId": 8
+      },
+      {
+        "id": 10,
+        "message": "So what should everyone bring? Let's split it",
+        "entities": [],
+        "date": 1791810248,
+        "fromUserId": "2"
+      },
+      {
+        "id": 11,
+        "message": "I'll bring the grill and charcoal",
+        "entities": [],
+        "date": 1791810345,
+        "fromUserId": "5",
+        "replyToMsgId": 10
+      },
+      {
+        "id": 12,
+        "message": "Board games + the big speaker 🎲",
+        "entities": [],
+        "date": 1791810442,
+        "fromUserId": "6",
+        "replyToMsgId": 10
+      },
+      {
+        "id": 13,
+        "message": "Coffee, the good stuff ☕️",
+        "entities": [],
+        "date": 1791810539,
+        "fromUserId": "1",
+        "out": true,
+        "replyToMsgId": 10
+      },
+      {
+        "id": 14,
+        "message": "I've got first-aid kit and headlamps",
+        "entities": [],
+        "date": 1791810636,
+        "fromUserId": "4",
+        "replyToMsgId": 10
+      },
+      {
+        "id": 15,
+        "message": "Snacks. Lots of snacks.",
+        "entities": [],
+        "date": 1791810733,
+        "fromUserId": "3",
+        "replyToMsgId": 10
+      },
+      {
+        "id": 16,
+        "message": "Perfect. Food shopping on Friday evening?",
+        "entities": [],
+        "date": 1791810830,
+        "fromUserId": "2"
+      },
+      {
+        "id": 17,
+        "message": "Friday works. Big supermarket near the station?",
+        "entities": [],
+        "date": 1791810927,
+        "fromUserId": "5",
+        "replyToMsgId": 16
+      },
+      {
+        "id": 18,
+        "message": "Yep, 19:00 at the entrance",
+        "entities": [],
+        "date": 1791811024,
+        "fromUserId": "2",
+        "replyToMsgId": 17
+      },
+      {
+        "id": 19,
+        "message": "Do we need sleeping bags or are there beds?",
+        "entities": [],
+        "date": 1791811121,
+        "fromUserId": "6"
+      },
+      {
+        "id": 20,
+        "message": "4 beds + a sofa. One sleeping bag needed",
+        "entities": [],
+        "date": 1791811218,
+        "fromUserId": "2",
+        "replyToMsgId": 19
+      },
+      {
+        "id": 21,
+        "message": "I have a spare one, I'll bring it",
+        "entities": [],
+        "date": 1791811315,
+        "fromUserId": "3",
+        "replyToMsgId": 20
+      },
+      {
+        "id": 22,
+        "message": "Weather looks good btw ☀️ 14° during the day",
+        "entities": [],
+        "date": 1791811412,
+        "fromUserId": "4"
+      },
+      {
+        "id": 23,
+        "message": "Nights will be cold though, around 2°",
+        "entities": [],
+        "date": 1791811509,
+        "fromUserId": "6",
+        "replyToMsgId": 22
+      },
+      {
+        "id": 24,
+        "message": "Then the fireplace better work 🔥",
+        "entities": [],
+        "date": 1791811606,
+        "fromUserId": "5",
+        "replyToMsgId": 23
+      },
+      {
+        "id": 25,
+        "message": "It does, the host said there's firewood in the shed",
+        "entities": [],
+        "date": 1791811703,
+        "fromUserId": "2",
+        "replyToMsgId": 24
+      },
+      {
+        "id": 26,
+        "message": "Hike on Sunday morning? There's a lake trail, 9 km",
+        "entities": [],
+        "date": 1791811800,
+        "fromUserId": "1",
+        "out": true
+      },
+      {
+        "id": 27,
+        "message": "Count me in 🥾",
+        "entities": [],
+        "date": 1791811897,
+        "fromUserId": "3",
+        "replyToMsgId": 26
+      },
+      {
+        "id": 28,
+        "message": "How steep is it?",
+        "entities": [],
+        "date": 1791811994,
+        "fromUserId": "6",
+        "replyToMsgId": 26
+      },
+      {
+        "id": 29,
+        "message": "Mostly flat, one climb at the end with a great view",
+        "entities": [],
+        "date": 1791812091,
+        "fromUserId": "1",
+        "out": true,
+        "replyToMsgId": 28
+      },
+      {
+        "id": 30,
+        "message": "Then I'm in too",
+        "entities": [],
+        "date": 1791812188,
+        "fromUserId": "4",
+        "replyToMsgId": 29
+      },
+      {
+        "id": 31,
+        "message": "I'll stay and guard the grill 😄",
+        "entities": [],
+        "date": 1791812285,
+        "fromUserId": "5",
+        "replyToMsgId": 26
+      },
+      {
+        "id": 32,
+        "message": "Leaving time on Saturday?",
+        "entities": [],
+        "date": 1791812382,
+        "fromUserId": "2"
+      },
+      {
+        "id": 33,
+        "message": "10:00 from my place?",
+        "entities": [],
+        "date": 1791812479,
+        "fromUserId": "4",
+        "replyToMsgId": 32
+      },
+      {
+        "id": 34,
+        "message": "Can we do 10:30? I have a delivery in the morning",
+        "entities": [],
+        "date": 1791812576,
+        "fromUserId": "3",
+        "replyToMsgId": 33
+      },
+      {
+        "id": 35,
+        "message": "Fine, 10:30 sharp",
+        "entities": [],
+        "date": 1791812673,
+        "fromUserId": "4",
+        "replyToMsgId": 34
+      },
+      {
+        "id": 36,
+        "message": "I'll make a playlist for the road 🎶",
+        "entities": [],
+        "date": 1791812770,
+        "fromUserId": "6"
+      },
+      {
+        "id": 37,
+        "message": "No sad songs this time",
+        "entities": [],
+        "date": 1791812867,
+        "fromUserId": "5",
+        "replyToMsgId": 36
+      },
+      {
+        "id": 38,
+        "message": "No promises 😌",
+        "entities": [],
+        "date": 1791812964,
+        "fromUserId": "6",
+        "replyToMsgId": 37
+      },
+      {
+        "id": 39,
+        "message": "Cabin rules: no shoes inside, check-out at 12 on Sunday",
+        "entities": [],
+        "date": 1791813061,
+        "fromUserId": "2"
+      },
+      {
+        "id": 40,
+        "message": "Got it",
+        "entities": [],
+        "date": 1791813158,
+        "fromUserId": "3",
+        "replyToMsgId": 39
+      },
+      {
+        "id": 41,
+        "message": "Btw who has the cabin address? I want to save it offline",
+        "entities": [],
+        "date": 1791813255,
+        "fromUserId": "1",
+        "out": true
+      },
+      {
+        "id": 42,
+        "message": "Pinned it in the morning message, but here: Pine Ridge Rd 14",
+        "entities": [],
+        "date": 1791813352,
+        "fromUserId": "2",
+        "replyToMsgId": 41
+      },
+      {
+        "id": 43,
+        "message": "Also it's 640 per night total, so 128 each",
+        "entities": [],
+        "date": 1791813449,
+        "fromUserId": "4"
+      },
+      {
+        "id": 44,
+        "message": "Sending mine now",
+        "entities": [],
+        "date": 1791813546,
+        "fromUserId": "5",
+        "replyToMsgId": 43
+      },
+      {
+        "id": 45,
+        "message": "Sent ✅",
+        "entities": [],
+        "date": 1791813643,
+        "fromUserId": "6",
+        "replyToMsgId": 43
+      },
+      {
+        "id": 46,
+        "message": "Wait, is the grill allowed there?",
+        "entities": [],
+        "date": 1791813740,
+        "fromUserId": "3",
+        "replyToMsgId": 11
+      },
+      {
+        "id": 47,
+        "message": "Yes, there's a fire pit next to the terrace",
+        "entities": [],
+        "date": 1791813837,
+        "fromUserId": "2",
+        "replyToMsgId": 46
+      },
+      {
+        "id": 48,
+        "message": "This is going to be great 🙌",
+        "entities": [],
+        "date": 1791813934,
+        "fromUserId": "1",
+        "out": true
+      }
+    ]
+  },
+  "availableReactions": [],
+  "dialogFilters": [],
+  "documents": [],
+  "topPeers": []
+}

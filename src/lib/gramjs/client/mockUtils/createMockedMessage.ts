@@ -23,12 +23,14 @@ export default function createMockedMessage(chatId: string, id: number, mockData
     replies,
     replyTo = createMockedReplyTo(chatId, id, mockData),
     entities = [new Api.MessageEntityMention({ offset: 0, length: 5 })],
+    fromUserId,
     ...rest
   } = omit(msg, ['replyToMsgId', 'replyToTopId', 'replyToForumTopic']);
 
   return new Api.Message({
     ...rest,
     id,
+    fromId: fromUserId ? new Api.PeerUser({ userId: BigInt(fromUserId) }) : undefined,
     peerId: createMockedTypePeer(chatId, mockData),
     date,
     message,

@@ -37,6 +37,7 @@ export type MockMessage = Omit<Partial<Api.Message>, 'reactions'> & {
   replyToTopId?: number;
   replyToMsgId?: number;
   replyToForumTopic?: boolean;
+  fromUserId?: string;
 };
 
 export type MockMessageMedia = {

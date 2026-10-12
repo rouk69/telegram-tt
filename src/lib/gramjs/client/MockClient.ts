@@ -23,6 +23,8 @@ import { downloadFile } from './downloadFile';
 
 import MockSender from './MockSender';
 
+const MOCK_PEER_COLORS = [0xD45246, 0xF68136, 0x6C61DF, 0x46BA43, 0x5CAFFA, 0x408ACF, 0xD95574];
+
 const sizeTypes: SizeType[] = ['u', 'v', 'w', 'y', 'd', 'x', 'c', 'm', 'b', 'a', 's', 'f'];
 
 class TelegramClient {
@@ -97,12 +99,13 @@ class TelegramClient {
     return this.mockData.dialogs[type].map((dialog) => createMockedDialog(dialog.id, this.mockData));
   }
 
-  start({
+  async start({
     mockScenario,
   }: {
     mockScenario: string;
-  }) {
-    return this.loadScenario(mockScenario);
+  }, onConnected?: NoneToVoidFunction) {
+    await this.loadScenario(mockScenario);
+    onConnected?.();
   }
 
   async invoke<A, R>(request: Api.Request<A, R>) {
@@ -242,11 +245,33 @@ class TelegramClient {
     }
 
     if (request instanceof Api.messages.GetDialogFilters) {
-      return [
-        new Api.DialogFilterDefault(),
-        ...this.mockData.dialogFilters
-          .map((dialogFilter) => createMockedDialogFilter(dialogFilter.id, this.mockData)),
-      ];
+      return new Api.messages.DialogFilters({
+        filters: [
+          new Api.DialogFilterDefault(),
+          ...this.mockData.dialogFilters
+            .map((dialogFilter) => createMockedDialogFilter(dialogFilter.id, this.mockData)),
+        ],
+      });
+    }
+
+    if (request instanceof Api.updates.GetState) {
+      return new Api.updates.State({
+        pts: 1, qts: 0, date: Math.floor(Date.now() / 1000), seq: 0, unreadCount: 0,
+      });
+    }
+
+    if (request instanceof Api.updates.GetDifference) {
+      return new Api.updates.DifferenceEmpty({ date: Math.floor(Date.now() / 1000), seq: 0 });
+    }
+
+    if (request instanceof Api.help.GetPeerColors) {
+      return new Api.help.PeerColors({
+        hash: 0,
+        colors: MOCK_PEER_COLORS.map((color, colorId) => new Api.help.PeerColorOption({
+          colorId,
+          colors: new Api.help.PeerColorSet({ colors: [color] }),
+        })),
+      });
     }
 
     if (request instanceof Api.messages.GetPinnedDialogs) {

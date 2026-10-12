@@ -13,7 +13,7 @@ export default function createMockedReplyTo(chatId: string, messageId: number, m
     replyToForumTopic,
   } = msg;
 
-  if (!replyToMsgId || !replyToTopId) return undefined;
+  if (!replyToMsgId) return undefined;
 
   return new Api.MessageReplyHeader({
     replyToTopId,
