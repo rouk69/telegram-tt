@@ -23,6 +23,8 @@ import { downloadFile } from './downloadFile';
 
 import MockSender from './MockSender';
 
+type MockLangPacks = Record<string, Record<string, string>>;
+
 const MOCK_PEER_COLORS = [0xD45246, 0xF68136, 0x6C61DF, 0x46BA43, 0x5CAFFA, 0x408ACF, 0xD95574];
 
 const sizeTypes: SizeType[] = ['u', 'v', 'w', 'y', 'd', 'x', 'c', 'm', 'b', 'a', 's', 'f'];
@@ -114,6 +116,22 @@ class TelegramClient {
       if (a !== 'pass') {
         return a;
       }
+    }
+
+    if (request instanceof Api.langpack.GetLangPack) {
+      // Optional local file with exported language packs, see translations.telegram.org
+      const packs = await fetch(new URL('./__mocks__/langpacks.json', import.meta.url))
+        .then((response) => (response.ok ? response.json() as Promise<MockLangPacks> : undefined))
+        .catch(() => undefined);
+      const strings = packs?.[request.langPack];
+      if (!strings) return undefined;
+
+      return new Api.LangPackDifference({
+        langCode: request.langCode,
+        fromVersion: 0,
+        version: 1,
+        strings: Object.entries(strings).map(([key, value]) => new Api.LangPackString({ key, value })),
+      });
     }
 
     if (this.mockData.appConfig && request instanceof Api.help.GetAppConfig) {
