@@ -745,6 +745,13 @@ export interface LangPair {
   'AccUnpinMessage': undefined;
   'CommentsTitle': undefined;
   'RepliesTitle': undefined;
+  'TimeCapsuleSend': undefined;
+  'TimeCapsulePickerTitle': undefined;
+  'TimeCapsuleInOneHour': undefined;
+  'TimeCapsuleTomorrow': undefined;
+  'TimeCapsuleInWeek': undefined;
+  'TimeCapsuleNewYear': undefined;
+  'TimeCapsuleSummary': undefined;
   'LeaveAComment': undefined;
   'PollsStopWarning': undefined;
   'PollsStopSure': undefined;
@@ -2700,6 +2707,9 @@ export interface LangPairWithVariables<V = LangVariable> {
   };
   'EphemeralOnlyVisibleToBot': {
     'bot': V;
+  };
+  'TimeCapsuleUnlocksIn': {
+    'time': V;
   };
   'EditedDate': {
     'date': V;

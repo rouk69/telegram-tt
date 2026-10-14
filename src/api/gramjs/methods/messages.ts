@@ -379,7 +379,7 @@ export function sendMessageLocal(
     chat, lastMessageId, text, entities, richMessage, replyInfo, suggestedPostInfo,
     attachment, sticker, story, gif, audio, poll, todo,
     contact, scheduledAt, scheduleRepeatPeriod, groupedId, sendAs, wasDrafted, isInvertedMedia, effectId, isPending,
-    messagePriceInStars, dice,
+    messagePriceInStars, dice, timeCapsule,
   } = params;
 
   if (!chat) return undefined;
@@ -412,6 +412,7 @@ export function sendMessageLocal(
     isPending,
     messagePriceInStars,
     dice,
+    timeCapsule,
   });
 
   sendApiUpdate({

@@ -874,6 +874,14 @@
 "Replies_one" = "{count} Reply";
 "Replies_other" = "{count} Replies";
 "RepliesTitle" = "Replies";
+"TimeCapsuleUnlocksIn" = "Unlocks in {time}";
+"TimeCapsuleSend" = "Seal in Time Capsule";
+"TimeCapsulePickerTitle" = "When should it open?";
+"TimeCapsuleInOneHour" = "In an hour";
+"TimeCapsuleTomorrow" = "Tomorrow morning";
+"TimeCapsuleInWeek" = "In a week";
+"TimeCapsuleNewYear" = "On New Year's Eve";
+"TimeCapsuleSummary" = "❄️ Time Capsule";
 "LeaveAComment" = "Leave a comment";
 "PollsStopWarning" = "If you stop this poll now, nobody will be able to vote in it anymore. This action cannot be undone.";
 "PollsStopSure" = "Stop";

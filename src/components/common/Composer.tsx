@@ -2594,6 +2594,27 @@ const Composer = ({
     });
   });
 
+  const handleSendTimeCapsule = useLastCallback((openDate: number) => {
+    if (!currentMessageList || attachments.length || hasRichOnlyContent) return;
+
+    const richEditorValue = richEditor.getValue();
+    const formatted = richEditorValue.blocks.length ? getRichInputAsFormatted(richEditorValue) : undefined;
+    if (!formatted?.text || !validateTextLength(formatted.text) || !checkSlowMode()) return;
+
+    sendMessage({
+      messageList: currentMessageList,
+      text: formatted.text,
+      entities: formatted.entities,
+      timeCapsule: { openDate },
+    });
+
+    lastMessageSendTimeSecondsRef.current = getServerTime();
+    clearDraft({ chatId, threadId, isLocalOnly: true });
+    requestMeasure(() => {
+      resetComposer(false);
+    });
+  });
+
   const handleSendSilent = useLastCallback(() => {
     if (!checkCanSendRichContent()) {
       return;
@@ -3258,6 +3279,8 @@ const Composer = ({
           onSendSilent={!isChatWithSelf ? handleSendSilent : undefined}
           onSendSchedule={!isInScheduledList ? handleSendScheduled : undefined}
           onSendWhenOnline={handleSendWhenOnline}
+          onSendTimeCapsule={isInMessageList && !isInScheduledList && !attachments.length
+            ? handleSendTimeCapsule : undefined}
           onRemoveEffect={handleRemoveEffect}
           onClose={handleContextMenuClose}
           onCloseAnimationEnd={handleContextMenuHide}

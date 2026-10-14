@@ -36,6 +36,7 @@ import type {
   ApiStorySkipped,
   ApiSuggestedPost,
   ApiThreadInfo,
+  ApiTimeCapsule,
   ApiVideo,
   MediaContent,
 } from '../../types';
@@ -525,6 +526,7 @@ export function buildLocalMessage({
   isPending,
   messagePriceInStars,
   dice,
+  timeCapsule,
 }: {
   chat: ApiChat;
   lastMessageId?: number;
@@ -550,6 +552,7 @@ export function buildLocalMessage({
   isPending?: true;
   messagePriceInStars?: number;
   dice?: string;
+  timeCapsule?: ApiTimeCapsule;
 }) {
   const localId = getNextLocalMessageId(lastMessageId);
   const media = attachment && buildUploadingMedia(attachment);
@@ -597,6 +600,7 @@ export function buildLocalMessage({
     }),
     ...(scheduledAt && { isScheduled: true }),
     scheduleRepeatPeriod,
+    timeCapsule,
     isForwardingAllowed: true,
     isInvertedMedia,
     effectId,

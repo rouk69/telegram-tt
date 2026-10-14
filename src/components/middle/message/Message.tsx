@@ -215,6 +215,7 @@ import RoundVideo from './RoundVideo';
 import Sticker from './Sticker';
 import Story from './Story';
 import StoryMention from './StoryMention';
+import TimeCapsule from './TimeCapsule';
 import TodoList from './TodoList';
 import Video from './Video';
 import WebPage from './WebPage';
@@ -1984,6 +1985,7 @@ const Message = ({
             </>
           )}
           {renderContent()}
+          {message.timeCapsule && <TimeCapsule message={message} />}
           {!isInDocumentGroupNotLast && metaPosition === 'standalone' && !isStoryMention && renderReactionsAndMeta()}
           {canShowActionButton && (
             <div className="message-action-buttons-container">

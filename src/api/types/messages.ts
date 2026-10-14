@@ -767,6 +767,10 @@ export type SizeTarget =
 
 export type BoughtPaidMedia = Pick<MediaContent, 'photo' | 'video'>;
 
+export interface ApiTimeCapsule {
+  openDate: number;
+}
+
 export interface ApiMessage {
   id: number;
   ephemeralBotId?: string;
@@ -780,6 +784,7 @@ export interface ApiMessage {
   content: MediaContent;
   date: number;
   isOutgoing: boolean;
+  timeCapsule?: ApiTimeCapsule;
   ttlPeriod?: number;
   senderId?: string;
   replyInfo?: ApiReplyInfo;

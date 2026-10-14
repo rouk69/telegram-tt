@@ -681,3 +681,7 @@ export function prepareMessageReplyInfo(
     replyToTopId: additionalReplyInfo?.replyToTopId || (!isMainThread ? Number(threadId) : undefined),
   };
 }
+
+export function isTimeCapsuleSealed(message: ApiMessage) {
+  return Boolean(message.timeCapsule && message.timeCapsule.openDate > getServerTime());
+}

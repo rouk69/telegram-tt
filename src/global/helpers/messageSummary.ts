@@ -9,7 +9,7 @@ import { type LangFn } from '../../util/localization';
 import trimText from '../../util/trimText';
 import { renderTextWithEntities } from '../../components/common/helpers/renderTextWithEntities';
 import {
-  getMessageTextWithFallback, getMessageTranscription,
+  getMessageTextWithFallback, getMessageTranscription, isTimeCapsuleSealed,
 } from './messages';
 import { getRichMessagePreviewText } from './richMessage';
 
@@ -24,6 +24,9 @@ export function getMessageSummaryText(
   truncateLength = TRUNCATED_SUMMARY_LENGTH,
   isExtended = false,
 ) {
+  // Sealed content must not leak through chat list previews and notifications
+  if (isTimeCapsuleSealed(message)) return lang('TimeCapsuleSummary');
+
   const emoji = !noEmoji && getMessageSummaryEmoji(message);
   const emojiWithSpace = emoji ? `${emoji} ` : '';
   const text = trimText(getMessageTextWithSpoilers(lang, message, statefulContent, truncateLength), truncateLength);

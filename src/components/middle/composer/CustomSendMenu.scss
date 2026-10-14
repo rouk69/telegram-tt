@@ -62,3 +62,10 @@
   opacity: 0;
   transition: 300ms opacity;
 }
+
+.CustomSendMenu_title {
+  padding: 0.5rem 1rem 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}

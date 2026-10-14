@@ -21,7 +21,7 @@ import useMouseInside from '../../../hooks/useMouseInside';
 import useOldLang from '../../../hooks/useOldLang';
 
 import Menu from '../../ui/Menu';
-import MenuItem from '../../ui/MenuItem';
+import MenuItem, { MenuItemSubtitle, MenuItemTitle } from '../../ui/MenuItem';
 import ReactionSelector from '../message/reactions/ReactionSelector';
 
 import './CustomSendMenu.scss';
@@ -36,6 +36,7 @@ export type OwnProps = {
   onSendSchedule?: NoneToVoidFunction;
   onSendWhenOnline?: NoneToVoidFunction;
   onRemoveEffect?: NoneToVoidFunction;
+  onSendTimeCapsule?: (openDate: number) => void;
   onClose: NoneToVoidFunction;
   onCloseAnimationEnd?: NoneToVoidFunction;
   chatId?: string;
@@ -52,6 +53,20 @@ export type OwnProps = {
 };
 
 const ANIMATION_DURATION = 200;
+const MORNING_HOUR = 9;
+const DAYS_IN_WEEK = 7;
+const HOUR_MS = 60 * 60 * 1000;
+const DAY_MS = 24 * HOUR_MS;
+
+type TimeCapsulePreset = 'hour' | 'tomorrow' | 'week' | 'newYear';
+
+const TIME_CAPSULE_PRESETS: TimeCapsulePreset[] = ['hour', 'tomorrow', 'week', 'newYear'];
+const TIME_CAPSULE_PRESET_KEYS = {
+  hour: 'TimeCapsuleInOneHour',
+  tomorrow: 'TimeCapsuleTomorrow',
+  week: 'TimeCapsuleInWeek',
+  newYear: 'TimeCapsuleNewYear',
+} as const;
 
 const CustomSendMenu: FC<OwnProps> = ({
   isOpen,
@@ -63,6 +78,7 @@ const CustomSendMenu: FC<OwnProps> = ({
   onSendSchedule,
   onSendWhenOnline,
   onRemoveEffect,
+  onSendTimeCapsule,
   onClose,
   onCloseAnimationEnd,
   chatId,
@@ -87,16 +103,28 @@ const CustomSendMenu: FC<OwnProps> = ({
   const oldLang = useOldLang();
   const lang = useLang();
   const [areItemsHidden, hideItems, showItems] = useFlag();
+  const [isTimeCapsuleMode, openTimeCapsuleMode, closeTimeCapsuleMode] = useFlag();
 
   useEffectWithPrevDeps(([prevIsOpen]) => {
     // Avoid context menu item shuffling when opened
     if (isOpen && !prevIsOpen) {
       showItems();
+      closeTimeCapsuleMode();
       setDisplayScheduleUntilOnline(Boolean(canScheduleUntilOnline));
     }
   }, [isOpen, canScheduleUntilOnline]);
 
   const [isReady, markIsReady, unmarkIsReady] = useFlag();
+
+  const handleTimeCapsuleClick = useLastCallback((e: React.SyntheticEvent) => {
+    // Keeps the menu open to pick when the capsule opens
+    e.stopPropagation();
+    openTimeCapsuleMode();
+  });
+
+  const handleTimeCapsulePresetClick = useLastCallback((e: React.SyntheticEvent, presetIndex?: number) => {
+    onSendTimeCapsule!(getTimeCapsuleOpenDate(TIME_CAPSULE_PRESETS[presetIndex!]));
+  });
 
   const handleOpenMessageEffectsPicker = useLastCallback((position: IAnchorPosition) => {
     hideItems();
@@ -160,18 +188,34 @@ const CustomSendMenu: FC<OwnProps> = ({
         )}
         dir={lang.isRtl ? 'rtl' : undefined}
       >
-        {onSendSilent && <MenuItem icon="mute" onClick={onSendSilent}>{oldLang('SendWithoutSound')}</MenuItem>}
-        {canSchedule && onSendSchedule && (
+        {isTimeCapsuleMode && (
+          <>
+            <div className="CustomSendMenu_title">{lang('TimeCapsulePickerTitle')}</div>
+            {TIME_CAPSULE_PRESETS.map((preset, i) => (
+              <MenuItem icon="timer" clickArg={i} onClick={handleTimeCapsulePresetClick}>
+                <MenuItemTitle>{lang(TIME_CAPSULE_PRESET_KEYS[preset])}</MenuItemTitle>
+                <MenuItemSubtitle>{formatOpenDate(getTimeCapsuleOpenDate(preset), lang.code)}</MenuItemSubtitle>
+              </MenuItem>
+            ))}
+          </>
+        )}
+        {!isTimeCapsuleMode && onSendSilent && (
+          <MenuItem icon="mute" onClick={onSendSilent}>{oldLang('SendWithoutSound')}</MenuItem>
+        )}
+        {!isTimeCapsuleMode && onSendTimeCapsule && (
+          <MenuItem icon="lock" onClick={handleTimeCapsuleClick}>{lang('TimeCapsuleSend')}</MenuItem>
+        )}
+        {!isTimeCapsuleMode && canSchedule && onSendSchedule && (
           <MenuItem icon="schedule" onClick={onSendSchedule}>
             {oldLang(isSavedMessages ? 'SetReminder' : 'ScheduleMessage')}
           </MenuItem>
         )}
-        {canSchedule && onSendSchedule && displayScheduleUntilOnline && (
+        {!isTimeCapsuleMode && canSchedule && onSendSchedule && displayScheduleUntilOnline && (
           <MenuItem icon="user-online" onClick={onSendWhenOnline}>
             {oldLang('SendWhenOnline')}
           </MenuItem>
         )}
-        {withEffects && hasCurrentEffect && (
+        {!isTimeCapsuleMode && withEffects && hasCurrentEffect && (
           <MenuItem icon="delete" onClick={onRemoveEffect}>
             {lang('RemoveEffect')}
           </MenuItem>
@@ -180,5 +224,25 @@ const CustomSendMenu: FC<OwnProps> = ({
     </Menu>
   );
 };
+
+function formatOpenDate(openDate: number, locale: string) {
+  return new Date(openDate * 1000).toLocaleString(locale, {
+    weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit',
+  });
+}
+
+function getTimeCapsuleOpenDate(preset: TimeCapsulePreset) {
+  const now = new Date();
+  switch (preset) {
+    case 'hour':
+      return Math.round((now.getTime() + HOUR_MS) / 1000);
+    case 'tomorrow':
+      return Math.round(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, MORNING_HOUR).getTime() / 1000);
+    case 'week':
+      return Math.round((now.getTime() + DAYS_IN_WEEK * DAY_MS) / 1000);
+    case 'newYear':
+      return Math.round(new Date(now.getFullYear() + 1, 0, 1).getTime() / 1000);
+  }
+}
 
 export default memo(CustomSendMenu);

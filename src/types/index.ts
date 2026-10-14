@@ -42,6 +42,7 @@ import type {
   ApiStory,
   ApiStorySkipped,
   ApiThreadInfo,
+  ApiTimeCapsule,
   ApiTopic,
   ApiTypingStatus,
   ApiVideo,
@@ -886,6 +887,7 @@ export type SendMessageParams = {
   forwardParams?: ForwardMessagesParams;
   isStoryReply?: boolean;
   suggestedMedia?: MediaContent;
+  timeCapsule?: ApiTimeCapsule;
 };
 
 export type ForwardedLocalMessagesSlice = {

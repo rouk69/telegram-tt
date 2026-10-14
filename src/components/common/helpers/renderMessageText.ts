@@ -9,6 +9,7 @@ import { ApiMessageEntityTypes } from '../../../api/types';
 import {
   getMessageStatefulContent,
   getMessageTextWithFallback,
+  isTimeCapsuleSealed,
 } from '../../../global/helpers';
 import {
   getMessageSummaryDescription,
@@ -81,6 +82,8 @@ export function renderMessageSummary(
   highlight?: string,
   truncateLength = TRUNCATED_SUMMARY_LENGTH,
 ): TextPart[] {
+  if (isTimeCapsuleSealed(message)) return renderText(lang('TimeCapsuleSummary'));
+
   const { entities } = message.content.text || {};
 
   const global = getGlobal();
