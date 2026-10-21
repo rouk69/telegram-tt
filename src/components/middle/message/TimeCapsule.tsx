@@ -64,9 +64,16 @@ const TimeCapsule = ({ message }: OwnProps) => {
 
     timingRef.current.openedAt = performance.now();
     setState('opening');
+    return undefined;
+  }, [secondsLeft, state]);
+
+  // Kept apart from the effect above, which is cleaned up as soon as the state changes
+  useEffect(() => {
+    if (state !== 'opening') return undefined;
+
     const timeout = setTimeout(() => setState('open'), OPEN_DURATION);
     return () => clearTimeout(timeout);
-  }, [secondsLeft, state]);
+  }, [state]);
 
   const runFrost = useLastCallback(() => {
     const canvas = canvasRef.current;
@@ -145,34 +152,37 @@ const TimeCapsule = ({ message }: OwnProps) => {
   if (isOpen) return undefined;
 
   return (
-    <div
-      ref={rootRef}
-      className={buildClassName(
-        styles.root,
-        state === 'sealed' && styles.sealed,
-        state === 'opening' && styles.opening,
-        isFreezing && styles.freezing,
-      )}
-    >
-      <div className={styles.tint} />
-      <canvas ref={canvasRef} className={styles.frost} />
-      <div className={styles.pill}>
-        <svg className={styles.flake} viewBox="0 0 24 24" aria-hidden>
-          <path d={SNOWFLAKE_PATH} />
-        </svg>
-        <span className={styles.label}>
-          {lang('TimeCapsuleUnlocksIn', {
-            time: (
-              <span className={styles.digits}>
-                {formatCountdown(Math.max(Math.ceil(secondsLeft), 0)).split('').map((char, i) => (
-                  <span key={`${i}-${char}`} className={styles.digit}>{char}</span>
-                ))}
-              </span>
-            ),
-          }, { withNodes: true })}
-        </span>
+    <>
+      <div className={buildClassName(styles.spacer, state === 'opening' && styles.collapsed)} />
+      <div
+        ref={rootRef}
+        className={buildClassName(
+          styles.root,
+          state === 'sealed' && styles.sealed,
+          state === 'opening' && styles.opening,
+          isFreezing && styles.freezing,
+        )}
+      >
+        <div className={styles.tint} />
+        <canvas ref={canvasRef} className={styles.frost} />
+        <div className={styles.pill}>
+          <svg className={styles.flake} viewBox="0 0 24 24" aria-hidden>
+            <path d={SNOWFLAKE_PATH} />
+          </svg>
+          <span className={styles.label}>
+            {lang('TimeCapsuleUnlocksIn', {
+              time: (
+                <span className={styles.digits}>
+                  {formatCountdown(Math.max(Math.ceil(secondsLeft), 0)).split('').map((char, i) => (
+                    <span key={`${i}-${char}`} className={styles.digit}>{char}</span>
+                  ))}
+                </span>
+              ),
+            }, { withNodes: true })}
+          </span>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
